@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SICA - Control de Asistencia</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SICA - Sistema de Control de Asistencia</h1>
+    <p>Prototipo universitario</p>
+  </header>
+
+  <nav>
+    <button class="nav-button active" data-view="empleados">1. Empleados</button>
+    <button class="nav-button" data-view="asistencia">2. Asistencia</button>
+    <button class="nav-button" data-view="reportes">3. Reportes</button>
+  </nav>
+
+  <main>
+    <section id="view-empleados" class="view">
+      <h2>Registro de empleados</h2>
+      <form id="employee-form">
+        <label>Nombre completo
+          <input id="employee-name" type="text" required maxlength="100" placeholder="Nombre del empleado">
+        </label>
+        <label>Cédula o código
+          <input id="employee-code" type="text" required maxlength="30" placeholder="Ej. 001-000000-0000A">
+        </label>
+        <label>Sucursal
+          <select id="employee-branch" required>
+            <option value="">Seleccione una sucursal</option>
+            <option>Managua</option>
+            <option>Masachapa</option>
+            <option>San Rafael del Sur</option>
+            <option>León</option>
+            <option>Granada</option>
+            <option>Rivas</option>
+          </select>
+        </label>
+        <label>Cargo
+          <input id="employee-role" type="text" required maxlength="70" placeholder="Cargo">
+        </label>
+        <button type="submit">Guardar empleado</button>
+      </form>
+
+      <h3>Empleados registrados</h3>
+      <p id="employee-count">Total de empleados: 0</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nombre</th><th>Código</th><th>Sucursal</th><th>Cargo</th><th>Acción</th></tr></thead>
+          <tbody id="employees-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-asistencia" class="view hidden">
+      <h2>Registro de asistencia</h2>
+      <p>Seleccione el empleado y marque la entrada o salida. La fecha y hora se toman del equipo.</p>
+      <form id="attendance-form">
+        <label>Empleado
+          <select id="attendance-employee" required>
+            <option value="">Seleccione un empleado</option>
+          </select>
+        </label>
+        <label>Movimiento
+          <select id="attendance-type" required>
+            <option value="Entrada">Entrada</option>
+            <option value="Salida">Salida</option>
+          </select>
+        </label>
+        <label>Observación (opcional)
+          <input id="attendance-note" type="text" maxlength="150" placeholder="Observación">
+        </label>
+        <button type="submit">Guardar asistencia</button>
+      </form>
+      <h3>Últimos registros</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Empleado</th><th>Sucursal</th><th>Movimiento</th><th>Fecha y hora</th><th>Observación</th></tr></thead>
+          <tbody id="attendance-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-reportes" class="view hidden">
+      <h2>Reportes</h2>
+      <div class="summary">
+        <p>Empleados: <strong id="report-employee-count">0</strong></p>
+        <p>Registros de asistencia: <strong id="report-attendance-count">0</strong></p>
+      </div>
+      <div class="report-filter">
+        <label>Filtrar por fecha
+          <input id="report-date" type="date">
+        </label>
+        <button id="clear-filter" type="button" class="secondary">Mostrar todos</button>
+        <button id="export-csv" type="button">Descargar CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Empleado</th><th>Código</th><th>Sucursal</th><th>Movimiento</th><th>Fecha y hora</th><th>Observación</th></tr></thead>
+          <tbody id="reports-table"></tbody>
+        </table>
+      </div>
+      <p class="note">Los datos se guardan en el almacenamiento local de este navegador. Este prototipo no usa una base de datos compartida.</p>
+    </section>
+  </main>
+
+  <footer>SICA - Proyecto universitario</footer>
+  <script src="app.js"></script>
+</body>
+</html>
